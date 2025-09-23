@@ -1,5 +1,5 @@
 import { AdminSidebar } from "@/components/AdminSidebar";
-import { AccountDetailsCard } from "@/components/AccountDetailsCard";
+import { AccountOverviewTabs } from "@/components/AccountOverviewTabs";
 import { InfoCards } from "@/components/InfoCards";
 import { Search, Bell, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -99,10 +99,11 @@ export default function CustomerDashboard() {
 
         {/* Main Content */}
         <main className="flex-1 p-6 space-y-6 overflow-auto">
-          {/* Account Details - Main Focus */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <AccountDetailsCard user={mockUser} />
-          </div>
+          {/* Account Overview Tabs - Main Focus */}
+          <AccountOverviewTabs 
+            user={mockUser} 
+            transactions={mockData.transactions}
+          />
 
           {/* Additional Information Cards */}
           <InfoCards
@@ -111,7 +112,6 @@ export default function CustomerDashboard() {
             deviceBreakdown={mockData.deviceBreakdown}
             accountVerification={mockData.accountVerification}
             referralInfo={mockData.referralInfo}
-            transactions={mockData.transactions}
             bankAccounts={mockData.bankAccounts}
           />
         </main>

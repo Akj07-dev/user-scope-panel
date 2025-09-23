@@ -38,14 +38,6 @@ interface InfoCardsProps {
     referredFrom?: string;
     referralCode: string;
   };
-  transactions: Array<{
-    id: string;
-    amount: string;
-    currency: string;
-    date: string;
-    status: string;
-    recipient: string;
-  }>;
   bankAccounts: {
     gbp?: { accountNumber: string; sortCode: string; };
     eur?: { iban: string; bic: string; };
@@ -59,7 +51,6 @@ export function InfoCards({
   deviceBreakdown,
   accountVerification,
   referralInfo,
-  transactions,
   bankAccounts
 }: InfoCardsProps) {
   const getStatusColor = (status: string) => {
@@ -95,6 +86,100 @@ export function InfoCards({
                 {country}
               </Badge>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Account Verification */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Shield className="w-5 h-5 text-primary" />
+            <span>Account Verification</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {accountVerification.map((verification, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">{verification.verificationType}</p>
+                  <p className="text-sm text-muted-foreground">{verification.timeVerified}</p>
+                </div>
+                <Badge className={getStatusColor(verification.status)}>
+                  {verification.status}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Bank Account Details */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Building2 className="w-5 h-5 text-primary" />
+            <span>Bank Account Details</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {bankAccounts.gbp && (
+              <div className="p-3 border border-border rounded-lg">
+                <h4 className="font-medium mb-2">GBP Account</h4>
+                <div className="text-sm space-y-1">
+                  <p><span className="text-muted-foreground">Account Number:</span> {bankAccounts.gbp.accountNumber}</p>
+                  <p><span className="text-muted-foreground">Sort Code:</span> {bankAccounts.gbp.sortCode}</p>
+                </div>
+              </div>
+            )}
+            {bankAccounts.eur && (
+              <div className="p-3 border border-border rounded-lg">
+                <h4 className="font-medium mb-2">EUR Account</h4>
+                <div className="text-sm space-y-1">
+                  <p><span className="text-muted-foreground">IBAN:</span> {bankAccounts.eur.iban}</p>
+                  <p><span className="text-muted-foreground">BIC:</span> {bankAccounts.eur.bic}</p>
+                </div>
+              </div>
+            )}
+            {bankAccounts.ngn && (
+              <div className="p-3 border border-border rounded-lg">
+                <h4 className="font-medium mb-2">NGN Account</h4>
+                <div className="text-sm space-y-1">
+                  <p><span className="text-muted-foreground">Account Number:</span> {bankAccounts.ngn.accountNumber}</p>
+                  <p><span className="text-muted-foreground">Bank Name:</span> {bankAccounts.ngn.bankName}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Referral Information */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Users className="w-5 h-5 text-primary" />
+            <span>Referral Information</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {referralInfo.referredBy && (
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Referred By:</span>
+              <span className="font-medium">{referralInfo.referredBy}</span>
+            </div>
+          )}
+          {referralInfo.referredFrom && (
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Referred From:</span>
+              <span className="font-medium">{referralInfo.referredFrom}</span>
+            </div>
+          )}
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Referral Code:</span>
+            <span className="font-medium font-mono text-sm">{referralInfo.referralCode}</span>
           </div>
         </CardContent>
       </Card>
@@ -149,131 +234,6 @@ export function InfoCards({
                 </div>
               </div>
             ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Account Verification */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Shield className="w-5 h-5 text-primary" />
-            <span>Account Verification</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {accountVerification.map((verification, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">{verification.verificationType}</p>
-                  <p className="text-sm text-muted-foreground">{verification.timeVerified}</p>
-                </div>
-                <Badge className={getStatusColor(verification.status)}>
-                  {verification.status}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Referral Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Users className="w-5 h-5 text-primary" />
-            <span>Referral Information</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {referralInfo.referredBy && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Referred By:</span>
-              <span className="font-medium">{referralInfo.referredBy}</span>
-            </div>
-          )}
-          {referralInfo.referredFrom && (
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Referred From:</span>
-              <span className="font-medium">{referralInfo.referredFrom}</span>
-            </div>
-          )}
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Referral Code:</span>
-            <span className="font-medium font-mono text-sm">{referralInfo.referralCode}</span>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Transactions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <CreditCard className="w-5 h-5 text-primary" />
-              <span>Recent Transactions</span>
-            </div>
-            <Button variant="outline" size="sm">View All</Button>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {transactions.slice(0, 5).map((transaction) => (
-              <div key={transaction.id} className="flex items-center justify-between p-2 border border-border rounded">
-                <div>
-                  <p className="font-medium">{transaction.amount} {transaction.currency}</p>
-                  <p className="text-sm text-muted-foreground">to {transaction.recipient}</p>
-                </div>
-                <div className="text-right">
-                  <Badge className={getStatusColor(transaction.status)} variant="outline">
-                    {transaction.status}
-                  </Badge>
-                  <p className="text-xs text-muted-foreground mt-1">{transaction.date}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Bank Account Details */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Building2 className="w-5 h-5 text-primary" />
-            <span>Bank Account Details</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {bankAccounts.gbp && (
-              <div className="p-3 border border-border rounded-lg">
-                <h4 className="font-medium mb-2">GBP Account</h4>
-                <div className="text-sm space-y-1">
-                  <p><span className="text-muted-foreground">Account Number:</span> {bankAccounts.gbp.accountNumber}</p>
-                  <p><span className="text-muted-foreground">Sort Code:</span> {bankAccounts.gbp.sortCode}</p>
-                </div>
-              </div>
-            )}
-            {bankAccounts.eur && (
-              <div className="p-3 border border-border rounded-lg">
-                <h4 className="font-medium mb-2">EUR Account</h4>
-                <div className="text-sm space-y-1">
-                  <p><span className="text-muted-foreground">IBAN:</span> {bankAccounts.eur.iban}</p>
-                  <p><span className="text-muted-foreground">BIC:</span> {bankAccounts.eur.bic}</p>
-                </div>
-              </div>
-            )}
-            {bankAccounts.ngn && (
-              <div className="p-3 border border-border rounded-lg">
-                <h4 className="font-medium mb-2">NGN Account</h4>
-                <div className="text-sm space-y-1">
-                  <p><span className="text-muted-foreground">Account Number:</span> {bankAccounts.ngn.accountNumber}</p>
-                  <p><span className="text-muted-foreground">Bank Name:</span> {bankAccounts.ngn.bankName}</p>
-                </div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
