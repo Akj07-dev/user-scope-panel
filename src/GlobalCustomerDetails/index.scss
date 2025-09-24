@@ -1,0 +1,291 @@
+// Global Customer Details - Main Styles
+// Enhanced SCSS with variables, mixins, and better organization
+
+// Basic CSS Reset and Base Styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+// SCSS Variables for Design System
+// All colors MUST be HSL format
+
+// Light Theme Colors
+$light-background: 248 250 252; // slate-50 equivalent
+$light-foreground: 213 27% 24%; // slate-700 equivalent
+$light-card: 0 0% 100%;
+$light-card-foreground: 213 27% 24%;
+$light-popover: 0 0% 100%;
+$light-popover-foreground: 213 27% 24%;
+
+// Primary Colors
+$primary: 214 88% 27%; // blue-700
+$primary-foreground: 0 0% 100%;
+$primary-hover: 214 88% 35%; // lighter blue for hover
+
+// Secondary Colors
+$secondary: 214 32% 91%; // blue-100
+$secondary-foreground: 213 27% 24%;
+
+// Muted Colors
+$muted: 210 40% 96%;
+$muted-foreground: 215 20% 52%; // slate-500
+
+// Accent Colors
+$accent: 214 88% 95%; // blue-50
+$accent-foreground: 214 88% 27%;
+
+// Status Colors
+$success: 142 71% 45%; // green-600
+$success-foreground: 0 0% 100%;
+$warning: 45 93% 47%; // yellow-500
+$warning-foreground: 0 0% 100%;
+$destructive: 0 84% 60%;
+$destructive-foreground: 0 0% 100%;
+
+// Border & Input Colors
+$border: 214 32% 88%; // blue-200
+$input: 214 32% 88%;
+$ring: 214 88% 27%;
+
+// Border Radius
+$radius: 0.75rem;
+
+// Dark Theme Colors
+$dark-background: 222.2 84% 4.9%;
+$dark-foreground: 210 40% 98%;
+$dark-card: 222.2 84% 4.9%;
+$dark-card-foreground: 210 40% 98%;
+$dark-popover: 222.2 84% 4.9%;
+$dark-popover-foreground: 210 40% 98%;
+$dark-primary: 210 40% 98%;
+$dark-primary-foreground: 222.2 47.4% 11.2%;
+$dark-secondary: 217.2 32.6% 17.5%;
+$dark-secondary-foreground: 210 40% 98%;
+$dark-muted: 217.2 32.6% 17.5%;
+$dark-muted-foreground: 215 20.2% 65.1%;
+$dark-accent: 217.2 32.6% 17.5%;
+$dark-accent-foreground: 210 40% 98%;
+$dark-destructive: 0 62.8% 30.6%;
+$dark-destructive-foreground: 210 40% 98%;
+$dark-border: 217.2 32.6% 17.5%;
+$dark-input: 217.2 32.6% 17.5%;
+$dark-ring: 212.7 26.8% 83.9%;
+
+// Sidebar Colors
+$sidebar-background: 0 0% 100%;
+$sidebar-foreground: 213 27% 24%;
+$sidebar-primary: 214 88% 27%;
+$sidebar-primary-foreground: 0 0% 100%;
+$sidebar-accent: 214 32% 96%;
+$sidebar-accent-foreground: 214 88% 27%;
+$sidebar-border: 214 32% 88%;
+$sidebar-ring: 214 88% 27%;
+
+// Dark Sidebar Colors
+$dark-sidebar-background: 240 5.9% 10%;
+$dark-sidebar-foreground: 240 4.8% 95.9%;
+$dark-sidebar-primary: 224.3 76.3% 48%;
+$dark-sidebar-primary-foreground: 0 0% 100%;
+$dark-sidebar-accent: 240 3.7% 15.9%;
+$dark-sidebar-accent-foreground: 240 4.8% 95.9%;
+$dark-sidebar-border: 240 3.7% 15.9%;
+$dark-sidebar-ring: 217.2 91.2% 59.8%;
+
+// Mixins
+@mixin gradient-primary {
+  background: linear-gradient(135deg, hsl($primary), hsl($primary-hover));
+}
+
+@mixin gradient-subtle {
+  background: linear-gradient(180deg, hsl($light-background), hsl($accent));
+}
+
+@mixin shadow-sm {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+:root {
+  /* Admin Dashboard Theme - Professional Blues & Grays */
+  --background: #{$light-background};
+  --foreground: #{$light-foreground};
+
+  --card: #{$light-card};
+  --card-foreground: #{$light-card-foreground};
+
+  --popover: #{$light-popover};
+  --popover-foreground: #{$light-popover-foreground};
+
+  /* Primary - Professional Blue */
+  --primary: #{$primary};
+  --primary-foreground: #{$primary-foreground};
+  --primary-hover: #{$primary-hover};
+
+  /* Secondary - Light Gray */
+  --secondary: #{$secondary};
+  --secondary-foreground: #{$secondary-foreground};
+
+  /* Muted - Subtle Gray */
+  --muted: #{$muted};
+  --muted-foreground: #{$muted-foreground};
+
+  /* Accent - Soft Blue */
+  --accent: #{$accent};
+  --accent-foreground: #{$accent-foreground};
+
+  /* Status Colors */
+  --success: #{$success};
+  --success-foreground: #{$success-foreground};
+  --warning: #{$warning};
+  --warning-foreground: #{$warning-foreground};
+  --destructive: #{$destructive};
+  --destructive-foreground: #{$destructive-foreground};
+
+  /* Borders & Inputs */
+  --border: #{$border};
+  --input: #{$input};
+  --ring: #{$ring};
+
+  --radius: #{$radius};
+
+  /* Gradients for enhanced visual appeal */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+  --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--accent)));
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  /* Sidebar Variables */
+  --sidebar-background: #{$sidebar-background};
+  --sidebar-foreground: #{$sidebar-foreground};
+  --sidebar-primary: #{$sidebar-primary};
+  --sidebar-primary-foreground: #{$sidebar-primary-foreground};
+  --sidebar-accent: #{$sidebar-accent};
+  --sidebar-accent-foreground: #{$sidebar-accent-foreground};
+  --sidebar-border: #{$sidebar-border};
+  --sidebar-ring: #{$sidebar-ring};
+}
+
+.dark {
+  --background: #{$dark-background};
+  --foreground: #{$dark-foreground};
+
+  --card: #{$dark-card};
+  --card-foreground: #{$dark-card-foreground};
+
+  --popover: #{$dark-popover};
+  --popover-foreground: #{$dark-popover-foreground};
+
+  --primary: #{$dark-primary};
+  --primary-foreground: #{$dark-primary-foreground};
+
+  --secondary: #{$dark-secondary};
+  --secondary-foreground: #{$dark-secondary-foreground};
+
+  --muted: #{$dark-muted};
+  --muted-foreground: #{$dark-muted-foreground};
+
+  --accent: #{$dark-accent};
+  --accent-foreground: #{$dark-accent-foreground};
+
+  --destructive: #{$dark-destructive};
+  --destructive-foreground: #{$dark-destructive-foreground};
+
+  --border: #{$dark-border};
+  --input: #{$dark-input};
+  --ring: #{$dark-ring};
+
+  --sidebar-background: #{$dark-sidebar-background};
+  --sidebar-foreground: #{$dark-sidebar-foreground};
+  --sidebar-primary: #{$dark-sidebar-primary};
+  --sidebar-primary-foreground: #{$dark-sidebar-primary-foreground};
+  --sidebar-accent: #{$dark-sidebar-accent};
+  --sidebar-accent-foreground: #{$dark-sidebar-accent-foreground};
+  --sidebar-border: #{$dark-sidebar-border};
+  --sidebar-ring: #{$dark-sidebar-ring};
+}
+
+/* Base element styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}

@@ -1,0 +1,72 @@
+// Global Customer Details - App Styles
+// Enhanced SCSS with variables and mixins
+
+// Variables
+$root-max-width: 1280px;
+$root-padding: 2rem;
+$logo-height: 6em;
+$logo-padding: 1.5em;
+$transition-duration: 300ms;
+$card-padding: 2em;
+$text-muted-color: #888;
+
+// Mixins
+@mixin transition($property: all, $duration: $transition-duration, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin drop-shadow-hover($color: #646cffaa) {
+  filter: drop-shadow(0 0 2em $color);
+}
+
+@mixin animation($name, $duration: 20s, $timing: linear, $iteration: infinite) {
+  animation: $name $iteration $duration $timing;
+}
+
+// Keyframes
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Main Styles
+#root {
+  max-width: $root-max-width;
+  margin: 0 auto;
+  padding: $root-padding;
+  text-align: center;
+}
+
+.logo {
+  height: $logo-height;
+  padding: $logo-padding;
+  will-change: filter;
+  @include transition(filter);
+
+  &:hover {
+    @include drop-shadow-hover();
+  }
+
+  &.react:hover {
+    @include drop-shadow-hover(#61dafbaa);
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    @include animation(logo-spin);
+  }
+}
+
+.card {
+  padding: $card-padding;
+}
+
+.read-the-docs {
+  color: $text-muted-color;
+}

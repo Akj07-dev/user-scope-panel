@@ -1,0 +1,547 @@
+// Global Customer Details - Modular SCSS
+// Enhanced SCSS with variables, mixins, and modular classes
+
+// Variables
+$root-max-width: 1280px;
+$root-padding: 2rem;
+$logo-height: 6em;
+$logo-padding: 1.5em;
+$transition-duration: 300ms;
+$card-padding: 2em;
+$text-muted-color: #888;
+
+// Dashboard specific variables
+$header-height: 4rem; // 64px
+$sidebar-width: 16rem; // 256px
+$border-radius: 0.5rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Mixins
+@mixin transition($property: all, $duration: $transition-duration, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin drop-shadow-hover($color: #646cffaa) {
+  filter: drop-shadow(0 0 2em $color);
+}
+
+@mixin animation($name, $duration: 20s, $timing: linear, $iteration: infinite) {
+  animation: $name $iteration $duration $timing;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Keyframes
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Dashboard Layout Classes
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+}
+
+.fullWidthContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+  width: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: $header-height;
+  border-bottom: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  @include flex-between;
+  padding: 0 $spacing-lg;
+}
+
+.headerTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.headerActions {
+  @include flex-center;
+  gap: $spacing-md;
+}
+
+.searchContainer {
+  position: relative;
+  width: 20rem; // 320px
+}
+
+.searchInput {
+  padding-left: 2.5rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--muted-foreground));
+  width: 1rem;
+  height: 1rem;
+}
+
+.headerButton {
+  border: 1px solid hsl(var(--border));
+  background-color: transparent;
+  @include flex-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $border-radius;
+  @include transition;
+
+  &:hover {
+    background-color: hsl(var(--accent));
+  }
+}
+
+.content {
+  flex: 1;
+  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  overflow: auto;
+}
+
+// Component-specific classes
+.tabsContainer {
+  width: 100%;
+}
+
+.tabsList {
+  display: inline-flex;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius;
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  padding: 0.25rem;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tabsTrigger {
+  @include flex-center;
+  gap: $spacing-sm;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.125rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  @include transition(all);
+
+  &[data-state="active"] {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.tabsContent {
+  margin-top: $spacing-lg;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+}
+
+.cardTitle {
+  @include flex-between;
+}
+
+.gridCols1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+}
+
+.gridCols2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.gridCols1Md2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gridCols1Lg2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.spaceY3 {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.spaceY4 {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.spaceY1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.flexBetween {
+  @include flex-between;
+}
+
+.flexCenter {
+  @include flex-center;
+}
+
+.flexItemsCenter {
+  display: flex;
+  align-items: center;
+}
+
+.flexItemsCenterJustifyBetween {
+  @include flex-between;
+}
+
+.flexItemsCenterGap2 {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.flexItemsCenterGap3 {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.flexItemsCenterGap4 {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex1MinW0 {
+  flex: 1;
+  min-width: 0;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.textSm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.textXs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.textXl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.fontMedium {
+  font-weight: 500;
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.fontMono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.textMutedForeground {
+  color: hsl(var(--muted-foreground));
+}
+
+.textForeground {
+  color: hsl(var(--foreground));
+}
+
+.textPrimary {
+  color: hsl(var(--primary));
+}
+
+.textPrimaryForeground {
+  color: hsl(var(--primary-foreground));
+}
+
+.textSuccessForeground {
+  color: hsl(var(--success-foreground));
+}
+
+.textWarningForeground {
+  color: hsl(var(--warning-foreground));
+}
+
+.textDestructiveForeground {
+  color: hsl(var(--destructive-foreground));
+}
+
+.textAccentForeground {
+  color: hsl(var(--accent-foreground));
+}
+
+.bgSuccess {
+  background-color: hsl(var(--success));
+}
+
+.bgWarning {
+  background-color: hsl(var(--warning));
+}
+
+.bgDestructive {
+  background-color: hsl(var(--destructive));
+}
+
+.bgMuted {
+  background-color: hsl(var(--muted));
+}
+
+.bgPrimary {
+  background-color: hsl(var(--primary));
+}
+
+.bgAccent {
+  background-color: hsl(var(--accent));
+}
+
+.bgCard {
+  background-color: hsl(var(--card));
+}
+
+.borderBorder {
+  border: 1px solid hsl(var(--border));
+}
+
+.borderR {
+  border-right: 1px solid hsl(var(--border));
+}
+
+.borderB {
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.borderT {
+  border-top: 1px solid hsl(var(--border));
+}
+
+.roundedLg {
+  border-radius: $border-radius;
+}
+
+.roundedFull {
+  border-radius: 9999px;
+}
+
+.p3 {
+  padding: $spacing-sm;
+}
+
+.p4 {
+  padding: $spacing-md;
+}
+
+.px4 {
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+}
+
+.py3 {
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+}
+
+.px4Py3 {
+  padding: $spacing-sm $spacing-md;
+}
+
+.h16 {
+  height: $header-height;
+}
+
+.h8 {
+  height: 2rem;
+}
+
+.w8 {
+  width: 2rem;
+}
+
+.w64 {
+  width: 16rem;
+}
+
+.w5 {
+  width: 1.25rem;
+}
+
+.h5 {
+  height: 1.25rem;
+}
+
+.w4 {
+  width: 1rem;
+}
+
+.h4 {
+  height: 1rem;
+}
+
+.mr3 {
+  margin-right: $spacing-sm;
+}
+
+.mt1 {
+  margin-top: 0.25rem;
+}
+
+.mb2 {
+  margin-bottom: $spacing-sm;
+}
+
+.gap2 {
+  gap: $spacing-sm;
+}
+
+.gap4 {
+  gap: $spacing-md;
+}
+
+.gap6 {
+  gap: $spacing-lg;
+}
+
+.breakAll {
+  word-break: break-all;
+}
+
+.transitionColors {
+  @include transition(color, background-color);
+}
+
+.hoverBgAccent:hover {
+  background-color: hsl(var(--accent));
+}
+
+.hoverTextAccentForeground:hover {
+  color: hsl(var(--accent-foreground));
+}
+
+// Sidebar styles removed - no longer needed
+
+// Legacy styles (keeping for compatibility)
+#root {
+  max-width: $root-max-width;
+  margin: 0 auto;
+  padding: $root-padding;
+  text-align: center;
+}
+
+.logo {
+  height: $logo-height;
+  padding: $logo-padding;
+  will-change: filter;
+  @include transition(filter);
+
+  &:hover {
+    @include drop-shadow-hover();
+  }
+
+  &.react:hover {
+    @include drop-shadow-hover(#61dafbaa);
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    @include animation(logo-spin);
+  }
+}
+
+.card {
+  padding: $card-padding;
+}
+
+.read-the-docs {
+  color: $text-muted-color;
+}
