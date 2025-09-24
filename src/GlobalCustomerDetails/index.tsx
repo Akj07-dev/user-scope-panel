@@ -1,5 +1,6 @@
 import { AccountOverviewTabs } from "@/GlobalCustomerDetails/components/AccountOverviewTabs";
 import { InfoCards } from "@/GlobalCustomerDetails/components/InfoCards";
+import { CustomerProfileHeader } from "@/GlobalCustomerDetails/components/CustomerProfileHeader";
 import styles from "./GlobalCustomerDetails.module.scss";
 
 // Mock data for demonstration
@@ -123,6 +124,9 @@ export default function Index() {
     <div className={styles.fullWidthContainer}>
       {/* Main Content */}
       <main className={styles.content}>
+        {/* Customer Profile Header */}
+        <CustomerProfileHeader user={mockUser} />
+
         {/* Account Overview Tabs - Main Focus */}
         <AccountOverviewTabs
           user={mockUser}

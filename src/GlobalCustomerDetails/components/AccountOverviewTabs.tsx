@@ -12,8 +12,8 @@ import {
 } from "@/GlobalCustomerDetails/components/ui/card";
 import { Badge } from "@/GlobalCustomerDetails/components/ui/badge";
 import { Button } from "@/GlobalCustomerDetails/components/ui/button";
-import { User, CreditCard } from "lucide-react";
-import styles from "../GlobalCustomerDetails.module.scss";
+import { User, CreditCard, TrendingUp, Clock, ArrowUpRight } from "lucide-react";
+import styles from "./AccountOverviewTabs.module.scss";
 
 interface User {
   firstName: string;
@@ -74,168 +74,88 @@ export function AccountOverviewTabs({
   };
 
   return (
-    <Tabs defaultValue="account-details" className={styles.tabsContainer}>
-      <TabsList className={styles.tabsList}>
-        <TabsTrigger value="account-details" className={styles.tabsTrigger}>
-          <User className={`${styles.w4} ${styles.h4}`} />
-          <span>Account Details</span>
-        </TabsTrigger>
-        <TabsTrigger value="transactions" className={styles.tabsTrigger}>
-          <CreditCard className={`${styles.w4} ${styles.h4}`} />
-          <span>Recent Transactions</span>
-        </TabsTrigger>
-      </TabsList>
+    <div className={styles.tabsWrapper}>
+      <Tabs defaultValue="account-details" className={styles.tabsContainer}>
+        <TabsList className={styles.tabsList}>
+          <TabsTrigger value="account-details" className={styles.tabsTrigger}>
+            <User className={styles.tabIcon} />
+            <span>Account Details</span>
+          </TabsTrigger>
+          <TabsTrigger value="transactions" className={styles.tabsTrigger}>
+            <TrendingUp className={styles.tabIcon} />
+            <span>Recent Transactions</span>
+          </TabsTrigger>
+        </TabsList>
 
-      <TabsContent value="account-details" className={styles.tabsContent}>
-        <Card>
-          <CardHeader>
-            <CardTitle className={styles.cardTitle}>
-              <span>Account Details</span>
-              <Badge className={getKycStatusColor(user.kycStatus)}>
-                {user.kycStatus}
-              </Badge>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className={styles.gridCols1Md2}>
-              <div className={styles.spaceY4}>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    First Name
-                  </p>
-                  <p className={styles.fontMedium}>{user.firstName}</p>
+        <TabsContent value="account-details" className={styles.tabsContent}>
+          <Card className={styles.detailsCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>
+                <span>Personal Information</span>
+                <Badge className={getKycStatusColor(user.kycStatus)}>
+                  {user.kycStatus}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className={styles.detailsContent}>
+              <div className={styles.detailsGrid}>
+                <div className={styles.detailItem}>
+                  <span className={styles.detailLabel}>Date of Birth</span>
+                  <span className={styles.detailValue}>{user.dateOfBirth}</span>
                 </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Last Name
-                  </p>
-                  <p className={styles.fontMedium}>{user.lastName}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Date of Birth
-                  </p>
-                  <p className={styles.fontMedium}>{user.dateOfBirth}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Country of Residence
-                  </p>
-                  <p className={styles.fontMedium}>{user.countryOfResidence}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Language
-                  </p>
-                  <p className={styles.fontMedium}>{user.language}</p>
+                <div className={styles.detailItem}>
+                  <span className={styles.detailLabel}>Language</span>
+                  <span className={styles.detailValue}>{user.language}</span>
                 </div>
               </div>
-              <div className={styles.spaceY4}>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Phone Number
-                  </p>
-                  <p className={styles.fontMedium}>{user.phoneNumber}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Email Address
-                  </p>
-                  <p className={styles.fontMedium}>{user.emailAddress}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Time Created
-                  </p>
-                  <p className={styles.fontMedium}>{user.timeCreated}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    Last Login Date
-                  </p>
-                  <p className={styles.fontMedium}>{user.lastLoginDate}</p>
-                </div>
-                <div>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
-                    User ID
-                  </p>
-                  <p
-                    className={`${styles.fontMedium} ${styles.fontMono} ${styles.textXs} ${styles.breakAll}`}
-                  >
-                    {user.userId}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-      <TabsContent value="transactions" className={styles.tabsContent}>
-        <Card>
-          <CardHeader>
-            <CardTitle className={styles.cardTitle}>
-              <span>Recent Transactions</span>
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className={styles.spaceY3}>
-              {transactions.map((transaction) => (
-                <div
-                  key={transaction.id}
-                  className={`${styles.flexItemsCenterJustifyBetween} ${styles.p3} ${styles.borderBorder} ${styles.roundedLg}`}
-                >
-                  <div>
-                    <p className={styles.fontMedium}>
-                      {transaction.amount} {transaction.currency}
-                    </p>
-                    <p
-                      className={`${styles.textSm} ${styles.textMutedForeground}`}
-                    >
-                      to {transaction.recipient}
-                    </p>
+        <TabsContent value="transactions" className={styles.tabsContent}>
+          <Card className={styles.transactionsCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>
+                <span>Recent Transactions</span>
+                <Button variant="outline" size="sm" className={styles.viewAllButton}>
+                  View All
+                  <ArrowUpRight className={styles.buttonIcon} />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className={styles.transactionsContent}>
+              <div className={styles.transactionsList}>
+                {transactions.map((transaction) => (
+                  <div
+                    key={transaction.id}
+                    className={styles.transactionItem}
+                  >
+                    <div className={styles.transactionMain}>
+                      <div className={styles.transactionAmount}>
+                        {transaction.amount}
+                      </div>
+                      <div className={styles.transactionRecipient}>
+                        to {transaction.recipient}
+                      </div>
+                    </div>
+                    <div className={styles.transactionDetails}>
+                      <Badge
+                        className={getTransactionStatusColor(transaction.status)}
+                      >
+                        {transaction.status}
+                      </Badge>
+                      <div className={styles.transactionDate}>
+                        <Clock className={styles.dateIcon} />
+                        {transaction.date}
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.textRight}>
-                    <Badge
-                      className={getTransactionStatusColor(transaction.status)}
-                    >
-                      {transaction.status}
-                    </Badge>
-                    <p
-                      className={`${styles.textXs} ${styles.textMutedForeground} ${styles.mt1}`}
-                    >
-                      {transaction.date}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
-    </Tabs>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
