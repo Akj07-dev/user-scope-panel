@@ -1,7 +1,8 @@
 .profileCard {
-  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   margin-bottom: 2rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
 
 .profileContent {
