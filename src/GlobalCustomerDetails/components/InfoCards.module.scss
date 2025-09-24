@@ -1,0 +1,343 @@
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.infoCard {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.1);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+}
+
+.cardHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.cardTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cardIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--primary));
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+// Destination Pills Styles
+.destinationPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.destinationPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 2px solid;
+  transition: all 0.2s ease;
+  cursor: default;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+
+  // Color variants for pills
+  &.blue {
+    background: hsl(221 83% 53% / 0.1);
+    color: hsl(221 83% 40%);
+    border-color: hsl(221 83% 53% / 0.3);
+  }
+
+  &.emerald {
+    background: hsl(142 76% 36% / 0.1);
+    color: hsl(142 76% 30%);
+    border-color: hsl(142 76% 36% / 0.3);
+  }
+
+  &.purple {
+    background: hsl(262 83% 58% / 0.1);
+    color: hsl(262 83% 45%);
+    border-color: hsl(262 83% 58% / 0.3);
+  }
+
+  &.orange {
+    background: hsl(32 95% 44% / 0.1);
+    color: hsl(32 95% 35%);
+    border-color: hsl(32 95% 44% / 0.3);
+  }
+
+  &.pink {
+    background: hsl(330 81% 60% / 0.1);
+    color: hsl(330 81% 45%);
+    border-color: hsl(330 81% 60% / 0.3);
+  }
+
+  &.indigo {
+    background: hsl(239 84% 67% / 0.1);
+    color: hsl(239 84% 50%);
+    border-color: hsl(239 84% 67% / 0.3);
+  }
+
+  &.teal {
+    background: hsl(172 66% 50% / 0.1);
+    color: hsl(172 66% 35%);
+    border-color: hsl(172 66% 50% / 0.3);
+  }
+
+  &.rose {
+    background: hsl(351 100% 71% / 0.1);
+    color: hsl(351 100% 55%);
+    border-color: hsl(351 100% 71% / 0.3);
+  }
+}
+
+// Verification Items
+.verificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.verificationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border));
+}
+
+.verificationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.verificationType {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+}
+
+.verificationTime {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+// Bank Account Styles
+.bankAccountsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bankAccount {
+  padding: 1rem;
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border));
+}
+
+.bankAccountTitle {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+}
+
+.bankAccountDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bankAccountDetail {
+  font-size: 0.75rem;
+  
+  .label {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .value {
+    color: hsl(var(--foreground));
+    font-weight: 500;
+  }
+}
+
+// Referral Info Styles
+.referralList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.referralItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.referralLabel {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+}
+
+.referralValue {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  
+  &.code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    background: hsl(var(--muted));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+  }
+}
+
+// Device Overview Styles
+.deviceOverviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deviceOverviewItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.deviceLabel {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+}
+
+.deviceValue {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  
+  &.code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    background: hsl(var(--muted));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+  }
+}
+
+// Device Breakdown Styles
+.deviceBreakdownList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deviceBreakdownItem {
+  padding: 1rem;
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border));
+}
+
+.deviceBreakdownHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.deviceName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.deviceVersion {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.deviceBreakdownDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.deviceDetail {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  
+  .deviceId {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .destinationPills {
+    gap: 0.5rem;
+  }
+  
+  .destinationPill {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}

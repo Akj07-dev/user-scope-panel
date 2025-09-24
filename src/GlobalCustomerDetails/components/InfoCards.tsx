@@ -16,7 +16,7 @@ import {
   Monitor,
   Clock,
 } from "lucide-react";
-import styles from "../GlobalCustomerDetails.module.scss";
+import styles from "./InfoCards.module.scss";
 
 interface InfoCardsProps {
   preferredDestinations: string[];
@@ -75,52 +75,56 @@ export function InfoCards({
     }
   };
 
+  // Color variants for destination pills
+  const pillColors = ['blue', 'emerald', 'purple', 'orange', 'pink', 'indigo', 'teal', 'rose'];
+  
+  const getRandomPillColor = (index: number) => {
+    return pillColors[index % pillColors.length];
+  };
+
   return (
-    <div className={styles.gridCols1Lg2}>
+    <div className={styles.cardsGrid}>
       {/* Preferred Destinations */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <MapPin
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Preferred Destination Countries</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <MapPin className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Preferred Destination Countries</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div className={styles.flexWrap}>
-            {preferredDestinations.map((country) => (
-              <Badge key={country} variant="secondary">
+        <CardContent className={styles.cardContent}>
+          <div className={styles.destinationPills}>
+            {preferredDestinations.map((country, index) => (
+              <div 
+                key={country} 
+                className={`${styles.destinationPill} ${styles[getRandomPillColor(index)]}`}
+              >
                 {country}
-              </Badge>
+              </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
       {/* Account Verification */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <Shield
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Account Verification</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Shield className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Account Verification</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div className={styles.spaceY3}>
+        <CardContent className={styles.cardContent}>
+          <div className={styles.verificationList}>
             {accountVerification.map((verification, index) => (
-              <div key={index} className={styles.flexItemsCenterJustifyBetween}>
-                <div>
-                  <p className={styles.fontMedium}>
+              <div key={index} className={styles.verificationItem}>
+                <div className={styles.verificationInfo}>
+                  <div className={styles.verificationType}>
                     {verification.verificationType}
-                  </p>
-                  <p
-                    className={`${styles.textSm} ${styles.textMutedForeground}`}
-                  >
+                  </div>
+                  <div className={styles.verificationTime}>
                     {verification.timeVerified}
-                  </p>
+                  </div>
                 </div>
                 <Badge className={getStatusColor(verification.status)}>
                   {verification.status}
@@ -132,79 +136,57 @@ export function InfoCards({
       </Card>
 
       {/* Bank Account Details */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <Building2
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Bank Account Details</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Building2 className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Bank Account Details</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div className={styles.spaceY4}>
+        <CardContent className={styles.cardContent}>
+          <div className={styles.bankAccountsList}>
             {bankAccounts.gbp && (
-              <div
-                className={`${styles.p3} ${styles.borderBorder} ${styles.roundedLg}`}
-              >
-                <h4 className={`${styles.fontMedium} ${styles.mb2}`}>
-                  GBP Account
-                </h4>
-                <div className={`${styles.textSm} ${styles.spaceY1}`}>
-                  <p>
-                    <span className={styles.textMutedForeground}>
-                      Account Number:
-                    </span>{" "}
-                    {bankAccounts.gbp.accountNumber}
-                  </p>
-                  <p>
-                    <span className={styles.textMutedForeground}>
-                      Sort Code:
-                    </span>{" "}
-                    {bankAccounts.gbp.sortCode}
-                  </p>
+              <div className={styles.bankAccount}>
+                <div className={styles.bankAccountTitle}>GBP Account</div>
+                <div className={styles.bankAccountDetails}>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>Account Number: </span>
+                    <span className={styles.value}>{bankAccounts.gbp.accountNumber}</span>
+                  </div>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>Sort Code: </span>
+                    <span className={styles.value}>{bankAccounts.gbp.sortCode}</span>
+                  </div>
                 </div>
               </div>
             )}
             {bankAccounts.eur && (
-              <div
-                className={`${styles.p3} ${styles.borderBorder} ${styles.roundedLg}`}
-              >
-                <h4 className={`${styles.fontMedium} ${styles.mb2}`}>
-                  EUR Account
-                </h4>
-                <div className={`${styles.textSm} ${styles.spaceY1}`}>
-                  <p>
-                    <span className={styles.textMutedForeground}>IBAN:</span>{" "}
-                    {bankAccounts.eur.iban}
-                  </p>
-                  <p>
-                    <span className={styles.textMutedForeground}>BIC:</span>{" "}
-                    {bankAccounts.eur.bic}
-                  </p>
+              <div className={styles.bankAccount}>
+                <div className={styles.bankAccountTitle}>EUR Account</div>
+                <div className={styles.bankAccountDetails}>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>IBAN: </span>
+                    <span className={styles.value}>{bankAccounts.eur.iban}</span>
+                  </div>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>BIC: </span>
+                    <span className={styles.value}>{bankAccounts.eur.bic}</span>
+                  </div>
                 </div>
               </div>
             )}
             {bankAccounts.ngn && (
-              <div
-                className={`${styles.p3} ${styles.borderBorder} ${styles.roundedLg}`}
-              >
-                <h4 className={`${styles.fontMedium} ${styles.mb2}`}>
-                  NGN Account
-                </h4>
-                <div className={`${styles.textSm} ${styles.spaceY1}`}>
-                  <p>
-                    <span className={styles.textMutedForeground}>
-                      Account Number:
-                    </span>{" "}
-                    {bankAccounts.ngn.accountNumber}
-                  </p>
-                  <p>
-                    <span className={styles.textMutedForeground}>
-                      Bank Name:
-                    </span>{" "}
-                    {bankAccounts.ngn.bankName}
-                  </p>
+              <div className={styles.bankAccount}>
+                <div className={styles.bankAccountTitle}>NGN Account</div>
+                <div className={styles.bankAccountDetails}>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>Account Number: </span>
+                    <span className={styles.value}>{bankAccounts.ngn.accountNumber}</span>
+                  </div>
+                  <div className={styles.bankAccountDetail}>
+                    <span className={styles.label}>Bank Name: </span>
+                    <span className={styles.value}>{bankAccounts.ngn.bankName}</span>
+                  </div>
                 </div>
               </div>
             )}
@@ -213,113 +195,105 @@ export function InfoCards({
       </Card>
 
       {/* Referral Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <Users
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Referral Information</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Users className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Referral Information</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent className={styles.spaceY3}>
-          {referralInfo.referredBy && (
-            <div className={styles.flexBetween}>
-              <span className={styles.textMutedForeground}>Referred By:</span>
-              <span className={styles.fontMedium}>
-                {referralInfo.referredBy}
+        <CardContent className={styles.cardContent}>
+          <div className={styles.referralList}>
+            {referralInfo.referredBy && (
+              <div className={styles.referralItem}>
+                <span className={styles.referralLabel}>Referred By:</span>
+                <span className={styles.referralValue}>
+                  {referralInfo.referredBy}
+                </span>
+              </div>
+            )}
+            {referralInfo.referredFrom && (
+              <div className={styles.referralItem}>
+                <span className={styles.referralLabel}>Referred From:</span>
+                <span className={styles.referralValue}>
+                  {referralInfo.referredFrom}
+                </span>
+              </div>
+            )}
+            <div className={styles.referralItem}>
+              <span className={styles.referralLabel}>Referral Code:</span>
+              <span className={`${styles.referralValue} ${styles.code}`}>
+                {referralInfo.referralCode}
               </span>
             </div>
-          )}
-          {referralInfo.referredFrom && (
-            <div className={styles.flexBetween}>
-              <span className={styles.textMutedForeground}>Referred From:</span>
-              <span className={styles.fontMedium}>
-                {referralInfo.referredFrom}
-              </span>
-            </div>
-          )}
-          <div className={styles.flexBetween}>
-            <span className={styles.textMutedForeground}>Referral Code:</span>
-            <span
-              className={`${styles.fontMedium} ${styles.fontMono} ${styles.textSm}`}
-            >
-              {referralInfo.referralCode}
-            </span>
           </div>
         </CardContent>
       </Card>
 
       {/* Device Overview */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <Smartphone
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Device Overview</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Smartphone className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Device Overview</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent className={styles.spaceY3}>
-          <div className={styles.flexBetween}>
-            <span className={styles.textMutedForeground}>App Version:</span>
-            <span className={styles.fontMedium}>
-              {deviceOverview.appVersion}
-            </span>
-          </div>
-          <div className={styles.flexBetween}>
-            <span className={styles.textMutedForeground}>
-              Operating System:
-            </span>
-            <span className={styles.fontMedium}>{deviceOverview.os}</span>
-          </div>
-          <div className={styles.flexBetween}>
-            <span className={styles.textMutedForeground}>Plus Code:</span>
-            <span
-              className={`${styles.fontMedium} ${styles.fontMono} ${styles.textSm}`}
-            >
-              {deviceOverview.plusCode}
-            </span>
-          </div>
-          <div className={styles.flexBetween}>
-            <span className={styles.textMutedForeground}>Device Name:</span>
-            <span className={styles.fontMedium}>
-              {deviceOverview.deviceName}
-            </span>
+        <CardContent className={styles.cardContent}>
+          <div className={styles.deviceOverviewList}>
+            <div className={styles.deviceOverviewItem}>
+              <span className={styles.deviceLabel}>App Version:</span>
+              <span className={styles.deviceValue}>
+                {deviceOverview.appVersion}
+              </span>
+            </div>
+            <div className={styles.deviceOverviewItem}>
+              <span className={styles.deviceLabel}>Operating System:</span>
+              <span className={styles.deviceValue}>{deviceOverview.os}</span>
+            </div>
+            <div className={styles.deviceOverviewItem}>
+              <span className={styles.deviceLabel}>Plus Code:</span>
+              <span className={`${styles.deviceValue} ${styles.code}`}>
+                {deviceOverview.plusCode}
+              </span>
+            </div>
+            <div className={styles.deviceOverviewItem}>
+              <span className={styles.deviceLabel}>Device Name:</span>
+              <span className={styles.deviceValue}>
+                {deviceOverview.deviceName}
+              </span>
+            </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Device Breakdown */}
-      <Card>
-        <CardHeader>
-          <CardTitle className={styles.flexItemsCenterGap2}>
-            <Monitor
-              className={`${styles.w5} ${styles.h5} ${styles.textPrimary}`}
-            />
-            <span>Device Breakdown</span>
-          </CardTitle>
+      <Card className={styles.infoCard}>
+        <CardHeader className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Monitor className={styles.cardIcon} />
+            <CardTitle className={styles.cardTitle}>Device Breakdown</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div className={styles.spaceY4}>
+        <CardContent className={styles.cardContent}>
+          <div className={styles.deviceBreakdownList}>
             {deviceBreakdown.slice(0, 2).map((device, index) => (
               <div
                 key={device.deviceId}
-                className={`${styles.p3} ${styles.borderBorder} ${styles.roundedLg}`}
+                className={styles.deviceBreakdownItem}
               >
-                <div
-                  className={`${styles.flexBetween} ${styles.flexItemsCenter} ${styles.mb2}`}
-                >
-                  <span className={`${styles.textSm} ${styles.fontMedium}`}>
+                <div className={styles.deviceBreakdownHeader}>
+                  <span className={styles.deviceName}>
                     Device {index + 1}
                   </span>
-                  <Badge variant="outline">{device.version}</Badge>
+                  <div className={styles.deviceVersion}>{device.version}</div>
                 </div>
-                <div
-                  className={`${styles.textXs} ${styles.textMutedForeground} ${styles.spaceY1}`}
-                >
-                  <p>ID: {device.deviceId.substring(0, 20)}...</p>
-                  <p>Last Login: {device.lastLoginTime}</p>
+                <div className={styles.deviceBreakdownDetails}>
+                  <div className={styles.deviceDetail}>
+                    ID: <span className={styles.deviceId}>{device.deviceId.substring(0, 20)}...</span>
+                  </div>
+                  <div className={styles.deviceDetail}>
+                    Last Login: {device.lastLoginTime}
+                  </div>
                 </div>
               </div>
             ))}
