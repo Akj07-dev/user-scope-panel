@@ -12,7 +12,7 @@ import {
 } from "@/GlobalCustomerDetails/components/ui/card";
 import { Badge } from "@/GlobalCustomerDetails/components/ui/badge";
 import { Button } from "@/GlobalCustomerDetails/components/ui/button";
-import { User, CreditCard, TrendingUp, Clock, ArrowUpRight } from "lucide-react";
+import { User, CreditCard, TrendingUp, Clock, ArrowUpRight, Edit, Shield, FileText, CheckCircle, AlertTriangle, KeyRound } from "lucide-react";
 import styles from "./AccountOverviewTabs.module.scss";
 
 interface User {
@@ -88,6 +88,42 @@ export function AccountOverviewTabs({
         </TabsList>
 
         <TabsContent value="account-details" className={styles.tabsContent}>
+          <Card className={styles.actionsCard}>
+            <CardHeader className={styles.cardHeader}>
+              <CardTitle className={styles.cardTitle}>
+                <span>Quick Actions</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className={styles.actionsContent}>
+              <div className={styles.actionsGrid}>
+                <Button variant="outline" className={styles.actionButton}>
+                  <Edit className={styles.actionIcon} />
+                  <span>Edit User Details</span>
+                </Button>
+                <Button variant="outline" className={styles.actionButton}>
+                  <Shield className={styles.actionIcon} />
+                  <span>Update Status</span>
+                </Button>
+                <Button variant="outline" className={styles.actionButton}>
+                  <FileText className={styles.actionIcon} />
+                  <span>Send Account Statement</span>
+                </Button>
+                <Button variant="outline" className={styles.actionButton}>
+                  <CheckCircle className={styles.actionIcon} />
+                  <span>Verify Customer</span>
+                </Button>
+                <Button variant="outline" className={styles.actionButton}>
+                  <AlertTriangle className={styles.actionIcon} />
+                  <span>Update Risk Level</span>
+                </Button>
+                <Button variant="outline" className={styles.actionButton}>
+                  <KeyRound className={styles.actionIcon} />
+                  <span>Force Password Reset</span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className={styles.detailsCard}>
             <CardHeader className={styles.cardHeader}>
               <CardTitle className={styles.cardTitle}>
